@@ -269,9 +269,9 @@
                                         class="digit1" style="transform: translate(125.574px, 72.5px);">160</span>
                                 </div>
                                 <div class="details">
-                                    <div class="gauge label">风压</div>
+                                    <div class="gauge label">风速</div>
                                     <div class="speed">87.3</div>
-                                    <div class="gauge unit">N/㎡</div>
+                                    <div class="gauge unit">m/s</div>
                                 </div>
                                 <div class="progress" style="transform: rotate(0deg);"></div>
                             </div>
@@ -350,7 +350,10 @@
                 legend: {
                     data: ['温度', '湿度'],
                     left: 10,
-                    bottom: 15
+                    bottom: 15,
+                    textStyle:{
+                        color:"#999"
+                    }
                 },
                 grid: {
                     top: 70,
@@ -377,9 +380,7 @@
                                 }
                             }
                         },
-                        data: ["2016-1", "2016-2", "2016-3", "2016-4", "2016-5", "2016-6", "2016-7", "2016-8",
-                            "2016-9", "2016-10", "2016-11", "2016-12"
-                        ]
+                        data: ["00:00", "06:00", "12:00", "18:00", "24:00" ]
                     },
                     {
                         type: 'category',
@@ -395,20 +396,18 @@
                         axisPointer: {
                             label: {
                                 formatter: function (params) {
-                                    return '湿度值  ' + params.value +
-                                        (params.seriesData.length ? '：' + params.seriesData[0].data : '');
+                                    return '湿度值  ' + params.value
+                                            + (params.seriesData.length ? '：' + params.seriesData[0].data : '');
                                 }
                             }
                         },
-                        data: ["2015-1", "2015-2", "2015-3", "2015-4", "2015-5", "2015-6", "2015-7", "2015-8",
-                            "2015-9", "2015-10", "2015-11", "2015-12"
-                        ]
+                        data: ["00:00", "06:00", "12:00", "18:00", "24:00" ]
                     }
                 ],
                 yAxis: [{
                     type: 'value',
                     nameTextStyle: {
-                        color: "#333"
+                        color: "#fff"
                     },
                     splitLine: {
                         lineStyle: {
@@ -422,8 +421,8 @@
                 series: [{
                         name: '温度',
                         type: 'line',
-                        xAxisIndex: 1,
                         smooth: true,
+
                         lineStyle: {
                             color: 'rgb(88,156,255)',
                             width: 5,
@@ -431,12 +430,13 @@
                         itemStyle: {
                             borderWidth: 4
                         },
-                        data: [2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3]
+                        data: [15, 18, 25, 28, 24, 20]
                     },
                     {
                         name: '湿度',
                         type: 'line',
                         smooth: true,
+                        xAxisIndex: 1,
                         itemStyle: {
                             borderWidth: 4
                         },
@@ -444,7 +444,7 @@
                             color: 'rgb(254,52,159)',
                             width: 5,
                         },
-                        data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2, 231.6, 46.6, 55.4, 18.4, 10.3, 0.7]
+                        data: [3.9, 5.9, 11.1, 18.7, 48.3, 69.2]
                     }
                 ]
             };;
@@ -459,24 +459,49 @@
             var app = {};
             option = null;
             option = {
+                title:{
+                    text:"24H用电量显示",
+                    textStyle:{
+                        color:"#999"
+                    },
+                    left:20,
+                    top:20,
+                    fontSize:12
+                },
                 grid: {
                     top: 70,
                     bottom: 30,
                     left: 35,
-                    right: 0
+                    right: 15
                 },
                 xAxis: {
                     type: 'category',
                     boundaryGap: false,
-                    data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
+                    color:'#999',
+                    data: ["00:00", "06:00", "12:00", "18:00", "24:00" ]
                 },
                 yAxis: {
-                    type: 'value'
+                    type: 'value',
+                    splitLine: {
+                        lineStyle: {
+                            // 使用深浅的间隔色
+                            color: ['#aaa', '#ddd'],
+                            width: 1,
+                            opacity: 0.2
+                        }
+                    }
                 },
                 series: [{
-                    data: [820, 932, 901, 934, 1290, 1330, 1320],
+                    data: [820, 932, 1480, 1500, 1200],
                     type: 'line',
-                    areaStyle: {}
+                    lineStyle:{
+                        color:'rgb(36,56,87)',
+                        width:2
+                    },
+                    areaStyle: {
+                        color:"#4a8ae5",
+                        opacity:0.5
+                    }
                 }]
             };
 
